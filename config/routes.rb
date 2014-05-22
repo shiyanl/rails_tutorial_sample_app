@@ -1,7 +1,11 @@
 RailsTutorialSampleApp::Application.routes.draw do
   resources :users
-
   #get "users/new"
+
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/help', to: 'static_pages#help', via: 'get'
@@ -10,7 +14,7 @@ RailsTutorialSampleApp::Application.routes.draw do
 
 
   #match '/', to: 'static_pages#home', via: 'get'
-  #or
+  #orf
   root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
